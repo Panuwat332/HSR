@@ -1,5 +1,3 @@
-//mport Image from "next/image";
-
 export default function Phainon() {
   return (
     <div className="relative w-full overflow-hidden">
