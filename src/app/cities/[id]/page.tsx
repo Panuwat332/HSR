@@ -1,17 +1,8 @@
-import { notFound } from 'next/navigation'
 
-async function fetchCity(id: string) {
-  const res = await fetch(`http://localhost:3000/cities/${id}`)
-
-  if (!res.ok) {
-    notFound()
-  }
-
-  return res.json()
-}
+import { fetchCity } from '@/lib/react-query/api';
 
 export default async function CityDetailPage({ params }: { params: { id: string } }) {
-  const city = await fetchCity(params.id)
+  const city = await fetchCity({ id: params.id });
 
   return (
     <div className="p-4">

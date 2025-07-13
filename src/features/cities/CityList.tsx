@@ -1,11 +1,18 @@
 'use client'
 
+
 import { useCitiesQuery } from './hooks'
 import { Card, CardContent } from '@/components/ui/card'
+import Link from 'next/link'
 
-export default function CityList() {
-  const { data: cities, isLoading, error } = useCitiesQuery()
+// เพิ่ม prop params เพื่อรองรับ parameter
+type CityListProps = {
+  search?: string;
+};
 
+export default function CityList({ search }: CityListProps) {
+  const { data: cities, isLoading, error } = useCitiesQuery({ search });// ส่ง search เข้าไปใน hook (จะส่ง search parameter นี้ไปยัง API เพื่อ filter หรือค้นหาข้อมูลเมืองที่ตรงกับ search นั้น 
+                                                                        // เช่น bangkok มันก้จะไปหาข้อมูลที่ตรงกัน ไม่รู้เข้าใจถูกป่าว)
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Error loading cities</div>
 
@@ -14,7 +21,9 @@ export default function CityList() {
       {cities?.map(city => (
         <Card key={city.id}>
           <CardContent className="p-4">
-            <p className="font-bold">{city.name}</p>
+            <Link href={`/cities/${city.id}`} className="font-bold text-blue-600 hover:underline">
+              {city.name}
+            </Link>
             <p className="text-gray-500">{city.country}</p>
           </CardContent>
         </Card>
