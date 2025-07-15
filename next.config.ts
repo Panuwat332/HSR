@@ -1,16 +1,37 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   images: {
     domains: [
-      'placehold.co', // <--- เพิ่ม Domain นี้เข้าไป
-      'fastcdn.hoyoverse.com', // <--- ถ้าคุณใช้ URL วิดีโอจาก hoyoverse.com ก็ควรเพิ่มไว้ด้วย (แม้ว่าจะไม่ใช่ Image Component โดยตรง แต่ก็ดีที่จะมี)
-      // เพิ่ม Domain อื่นๆ ที่คุณจะใช้รูปภาพจากภายนอกที่นี่
+      'placehold.co',
+      'fastcdn.hoyoverse.com',
+      'static.wikia.nocookie.net', 
     ],
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/api/characters', //ต้องใช้ rewrites เพื่อให้มันรู้จักว่าเป็น API ไม่งั้นดึงบ่ได้ 
+        destination: 'https://hsr-api.vercel.app/api/v1/characters',
+      },
+      {
+        source: '/api/characters/:id',
+        destination: 'https://hsr-api.vercel.app/api/v1/characters/:id',
+      },
+    ];
+  },
+  async headers() {
+    return [
+      {
+        source: '/api/:path*',
+        headers: [
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET, POST, PUT, DELETE, OPTIONS' },
+          { key: 'Access-Control-Allow-Headers', value: 'Content-Type, Authorization' },
+        ],
+      },
+    ];
   },
 };
 
 export default nextConfig;
-
-

@@ -29,8 +29,8 @@ export default function Navbar() {
           </NavigationMenuLink>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuLink href="/cities" className={cn(navigationMenuTriggerStyle(),"border-4 border-gray-900 hover:border-x-gray-800 hover:text-[21px] focus:bg-gray-900 focus:text-white text-white bg-gray-900 hover:bg-gray-900 hover:text-white font-mono text-xl subpixel-antialiased font-semibold")}>
-            Cities
+          <NavigationMenuLink href="/characters" className={cn(navigationMenuTriggerStyle(),"border-4 border-gray-900 hover:border-x-gray-800 hover:text-[21px] focus:bg-gray-900 focus:text-white text-white bg-gray-900 hover:bg-gray-900 hover:text-white font-mono text-xl subpixel-antialiased font-semibold")}>
+            Characters
           </NavigationMenuLink>
         </NavigationMenuItem>
 
